@@ -2,6 +2,7 @@ import { Server } from "http"
 import mongoose from "mongoose";
 import app from "./app";
 import { envVar } from "./app/config/env";
+import { seedSuperAdmin } from "./app/modules/users/user.services";
 
 let server: Server;
 
@@ -23,6 +24,10 @@ const startServer = async () => {
 };
 
 startServer();
+(async() =>{
+    await startServer();
+    await seedSuperAdmin();
+})();
 
 //  Cloud Hister jodi server off kora tahola ai error asba
 process.on("SIGTERM", () => {
