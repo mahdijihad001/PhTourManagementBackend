@@ -8,7 +8,7 @@ export const generateJwtToken = (payload : JwtPayload) =>{
 };
 
 
-export let verifyToken = (token : string) =>{
+export const verifyToken = (token : string) =>{
     const verifyToken = jwt.verify(token , envVar.ACCESS_SECRATE);
     return verifyToken;
 }

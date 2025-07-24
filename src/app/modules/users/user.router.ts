@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { Router } from "express";
 import { userController } from "./user.controller";
 import { createZodSchema } from "./userValidation";
 import { checkAuths } from "../../middleware/protectAdmin";
