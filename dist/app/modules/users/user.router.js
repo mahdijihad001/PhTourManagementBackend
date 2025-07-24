@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const user_controller_1 = require("./user.controller");
+const userValidation_1 = require("./userValidation");
+const protectAdmin_1 = require("../../middleware/protectAdmin");
+const user_interface_1 = require("./user.interface");
+const requestValidation_1 = require("../../utils/requestValidation");
+const userRouter = (0, express_1.Router)();
+userRouter.post("/register", (0, requestValidation_1.validateRequest)(userValidation_1.createZodSchema), user_controller_1.userController.createUser);
+userRouter.get("/user", (0, protectAdmin_1.checkAuths)(user_interface_1.Role.ADMIN, user_interface_1.Role.SUPER_ADMIN), user_controller_1.userController.getAllUser);
+userRouter.patch("/:id", (0, protectAdmin_1.checkAuths)(...Object.values(user_interface_1.Role)), user_controller_1.userController.updateUser);
+exports.default = userRouter;
